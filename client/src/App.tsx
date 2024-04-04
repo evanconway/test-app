@@ -5,9 +5,8 @@ const App = () => {
 
 	const getNewRandomNum = async () => {
 		setRandomNum(null);
-		setTimeout(() => {
-			setRandomNum(Math.floor(Math.random() * 1000) + 1);
-		}, 400);
+		const data = await (await fetch('/app/randomnumber')).json();
+		setRandomNum(data.randomNumber);
 	};
 
 	useEffect(() => {
