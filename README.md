@@ -2,6 +2,8 @@
 A simple web app to testing web server configuration.
 
 ## to run
+Ensure the latest version of node is installed.
+
 navigate to client directory
 npm i
 npm run build
