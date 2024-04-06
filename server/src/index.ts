@@ -1,6 +1,9 @@
 import express from 'express';
 import path from 'path';
+import { config } from 'dotenv';
 import appRouter from './app';
+
+config();
 
 const staticFileDir = '../../client/dist';
 
@@ -14,7 +17,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, staticFileDir, 'index.html'));
 });
 
-const port = 3000;
+let port = 3000;
+const envPort = process.env['PORT'];
+if (envPort === undefined) {
+    console.error('"PORT" is not defined in .env.');
+} else try {
+    port = Number.parseInt(envPort);
+} catch (err) {
+    console.error('PORT in .env is not an integer.');
+}
+
 app.listen(port, () => {
     console.log(`app running at  http://localhost:${port}`);
 });
